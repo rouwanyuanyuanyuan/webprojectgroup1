@@ -13,3 +13,13 @@
 王嘉亿 CharmsTok
 
 郑好 rouwanyuanyuanyuan
+
+## TASK 1
+已创建仓库并加入小组成员
+
+## TASK 2
+已完成如下文档：
+
+
+项目介绍：【腾讯文档】项目介绍
+https://docs.qq.com/doc/DWEF0S1hpWk55bnZv
