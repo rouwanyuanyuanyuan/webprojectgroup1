@@ -30,3 +30,13 @@ https://docs.qq.com/doc/DWEF0S1hpWk55bnZv
 
 需求描述：【腾讯文档】需求描述
 https://docs.qq.com/doc/DWGNtbm50S3pnVUd3
+
+## TASK 4
+已完成项目的建模文档撰写：
+
+
+【腾讯文档】Web应用建模
+https://docs.qq.com/doc/DWE5aYUV6bkRCcGx5
+
+## TASK 5
+确立了前后端并行开发，面向接口和服务的架构，具体实现请参见master分支
