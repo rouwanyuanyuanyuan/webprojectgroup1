@@ -8,7 +8,7 @@
       <!-- 用户名 -->
       <el-form-item prop="username">
         <span class="svg-container">
-          <i class="el-icon-a-052"></i>
+          <i class="el-icon-user"></i>
         </span>
         <el-input
           class="yuan"
@@ -24,7 +24,7 @@
       <!-- 密码 -->
       <el-form-item prop="password">
         <span class="svg-container">
-          <i class="el-icon-a-051"></i>
+          <i class="el-icon-lock"></i>
         </span>
         <el-input
           class="yuan"
@@ -45,18 +45,18 @@
       <!-- 权限 -->
       <el-form-item prop="authority">
         <span class="svg-container">
-          <i class="el-icon-a-062"></i>
+          <i class="el-icon-s-custom"></i>
         </span>
         <el-select v-model="loginForm.isadmin" placeholder="请选择" style="width: 418px">
           <el-option :key="0" label="读者" :value="0"></el-option>
           <el-option :key="1" label="管理员" :value="1"></el-option>
         </el-select>
       </el-form-item>
-      
+
       <!-- 登录按钮 -->
       <div style="height: 40px; margin-bottom: 30px;">
-        <el-button :loading="loading" type="primary" style="width: 48%; float: left;" @click.native.prevent="handleLogin">登录</el-button>
-        <el-button :loading="loading" type="success" style="width: 48%; float: right;" @click.native.prevent="handleRegister">注册</el-button>
+        <el-button :loading="loading" type="primary" style="width: 48%; float: left; border-radius: 20px; background: #ff7eb9; border: none;" @click.native.prevent="handleLogin">登录</el-button>
+        <el-button :loading="loading" type="success" style="width: 48%; float: right; border-radius: 20px; background: #ff9ac1; border: none;" @click.native.prevent="handleRegister">注册</el-button>
       </div>
     </el-form>
   </div>
@@ -127,13 +127,16 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
-$cursor: #fff;
+$bg: #fff0f5; /* 柔和的粉色背景 */
+$light_gray: #ff7eb9; /* 粉色文字 */
+$cursor: #ff7eb9; /* 粉色光标 */
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
     color: $cursor;
+    &::placeholder {
+      color: #ffb6c1; /* 浅粉色占位文字 */
+    }
   }
 }
 
@@ -184,37 +187,66 @@ $cursor: #fff;
   }
 
   .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
+    border: 1px solid #ffb6c1; /* 浅粉色边框 */
+    background: rgba(255, 255, 255, 0.7); /* 半透明白色背景 */
+    border-radius: 25px; /* 更圆的边框 */
+    color: #ff7eb9;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(255, 126, 185, 0.1); /* 粉色阴影 */
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(255, 126, 185, 0.2);
+    }
+  }
+
+  .el-button {
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 126, 185, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
   }
 }
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: linear-gradient(135deg, #ffd6e0 0%, #ff9ac1 100%); /* 粉色渐变背景 */
+$dark_gray: #ff7eb9; /* 粉色图标 */
+$light_gray: #fff; /* 白色文字 */
 
 .login-container {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
-  background-color: $bg;
+  background: $bg;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
 
   .login-form {
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 60px 35px;
     margin: 0 auto;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 126, 185, 0.2);
   }
 
   .tips {
     font-size: 14px;
-    color: #fff;
+    color: #ff7eb9;
     margin-bottom: 10px;
 
     span {
@@ -230,7 +262,6 @@ $light_gray:#eee;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
-    
     font-size: 20px;
   }
 
@@ -239,10 +270,11 @@ $light_gray:#eee;
 
     .title {
       font-size: 26px;
-      color: $light_gray;
+      color: #ff7eb9;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+      text-shadow: 0 2px 4px rgba(255, 126, 185, 0.2);
     }
   }
 
@@ -255,6 +287,5 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
-
 }
 </style>
