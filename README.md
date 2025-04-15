@@ -39,4 +39,8 @@ https://docs.qq.com/doc/DWGNtbm50S3pnVUd3
 https://docs.qq.com/doc/DWE5aYUV6bkRCcGx5
 
 ## TASK 5
-确立了前后端并行开发，面向接口和服务的架构，具体实现请参见master分支
+确立了前后端并行开发，面向接口和服务的架构，具体实现请参见master分支和fore-end分支，完成了架构设计报告
+
+
+## TASK 6
+完成了Web应用的设计
