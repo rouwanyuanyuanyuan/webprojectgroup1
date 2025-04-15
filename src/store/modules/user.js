@@ -42,7 +42,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), userpassword: password, isadmin: isadmin }).then(response => {
         const { status, message, data } = response
-        
+
         if(status !== 200) {
           reject(message)
         }
@@ -66,10 +66,10 @@ const actions = {
           reject('验证失败，请重新登录')
         }
 
-        data['avatar'] = '/pic/02.jpg'
+        data['avatar'] = '/pic/tafei.png'
         if (data.isadmin === 1){
           data['roles'] = ['admin']
-          data['avatar'] = '/pic/05.jpg'
+          data['avatar'] = '/pic/tafei.png'
         }
         else data['roles'] = ['reader']
 

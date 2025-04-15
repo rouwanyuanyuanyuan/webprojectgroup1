@@ -1,18 +1,17 @@
-// sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
-$subMenuActiveText:#f4f4f5; //https://github.com/ElemeFE/element/issues/12951
+// sidebar variables for pink theme
+$menuText: #5a3a4e;  // 深粉色文字
+$menuActiveText: #ff7eb9;  // 亮粉色激活文字
+$subMenuActiveText: #ff9ac1;  // 子菜单激活文字
 
-$menuBg:#304156;
-$menuHover:#263445;
+$menuBg: white;  // 浅粉色背景
+$menuHover: #ffd6e0;  // 菜单悬停背景
 
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
+$subMenuBg: #ffebf1;  // 子菜单背景(比主菜单稍深)
+$subMenuHover: #ffcce0;  // 子菜单悬停背景
 
 $sideBarWidth: 210px;
 
-// the :export directive is the magic sauce for webpack
-// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+// 导出供JavaScript使用
 :export {
   menuText: $menuText;
   menuActiveText: $menuActiveText;
