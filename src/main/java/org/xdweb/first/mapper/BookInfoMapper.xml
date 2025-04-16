@@ -21,4 +21,37 @@
                (select bookTypeName from book_type where book_type.bookTypeId = book_info.bookTypeId) as bookTypeName
         from book_info
     </select>
+
+    <select id="selectBySearch" resultMap="BaseResultMap">
+        select bookId, bookName, bookAuthor,bookPrice, bookTypeId, bookDesc,isBorrowed, bookImg,
+        (select bookTypeName from book_type where book_type.bookTypeId = book_info.bookTypeId) as bookTypeName
+        from book_info
+        <where>
+            <if test="bookname != null and bookname != '' ">
+                and bookName like concat('%',#{bookname},'%')
+            </if>
+            <if test="bookauthor != null and bookauthor != '' ">
+                and bookAuthor like concat('%',#{bookauthor},'%')
+            </if>
+            <if test="booktypeid != null and booktypeid != '' ">
+                and bookTypeId = #{booktypeid}
+            </if>
+        </where>
+        limit #{begin}, #{size}
+    </select>
+
+    <select id="selectCountBySearch" resultType="int">
+        select count(*) from book_info
+        <where>
+            <if test="bookname != null and bookname != '' ">
+                and bookName like concat('%',#{bookname},'%')
+            </if>
+            <if test="bookauthor != null and bookauthor != '' ">
+                and bookAuthor like concat('%',#{bookauthor},'%')
+            </if>
+            <if test="booktypeid != null and booktypeid != '' ">
+                and bookTypeId = #{booktypeid}
+            </if>
+        </where>
+    </select>
 </mapper>

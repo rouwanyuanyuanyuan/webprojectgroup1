@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Select;
 import org.xdweb.first.model.BookInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookInfoMapper {
 
@@ -19,4 +20,18 @@ public interface BookInfoMapper {
      * @return
      */
     List<BookInfo> selectAll();
+
+    /**
+     * 获得总数
+     * @param params
+     * @return
+     */
+    int selectCountBySearch(Map<String, Object> params);
+
+    /**
+     * 分页查询
+     * @param params
+     * @return
+     */
+    List<BookInfo> selectBySearch(Map<String, Object> params);
 }

@@ -3,12 +3,16 @@ package org.xdweb.first.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.xdweb.first.model.BookInfo;
 import org.xdweb.first.service.BookInfoService;
+import org.xdweb.first.utils.MyResult;
+import org.xdweb.first.utils.MyUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -36,5 +40,18 @@ public class BookInfoController {
     public List<BookInfo> queryBookInfos(){
         log.info("查询所有图书信息");
         return bookInfoService.queryBookInfos();
+    }
+
+    /**
+     * 分页搜索查询图书信息
+     * @param params
+     * @return
+     */
+    @GetMapping(value = "/queryBookInfosByPage")
+    public Map<String, Object> queryBookInfosByPage(@RequestParam Map<String, Object> params){
+        MyUtils.parsePageParams(params);
+        int count = bookInfoService.getSearchCount(params);  // 获得总数
+        List<BookInfo> bookInfos = bookInfoService.searchBookInfosByPage(params);  // 分页查询
+        return MyResult.getListResultMap(0, "success", count, bookInfos);
     }
 }
