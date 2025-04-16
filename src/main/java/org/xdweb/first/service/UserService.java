@@ -17,4 +17,11 @@ public interface UserService {
      * @param userObj
      */
     void saveUser(String token, User userObj);
+
+    /**
+     * 得到用户信息
+     * @param token
+     * @return
+     */
+    User getUser(String token);
 }

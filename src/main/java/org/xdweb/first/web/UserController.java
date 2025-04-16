@@ -44,4 +44,20 @@ public class UserController {
                     new HashMap<String, String>(){{ put("token", token); }});
         }
     }
+
+    /**
+     * 查看用户信息
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/info")
+    public Map<String, Object> info(String token) {
+        log.info("从redis中获取用户,{}", token);
+        User user = userService.getUser(token);
+        if(user == null) {  // 获取失败
+            return MyResult.getResultMap(420, "获取用户信息失败");
+        } else {    // 获取成功
+            return MyResult.getResultMap(200, "获取用户信息成功", user);
+        }
+    }
 }

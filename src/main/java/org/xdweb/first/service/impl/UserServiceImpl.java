@@ -41,4 +41,14 @@ public class UserServiceImpl implements UserService {
         // key是token，value是用户保存到redis中，超时时间1小时
         redisTemplate.opsForValue().set(token, user, 1, TimeUnit.HOURS);
     }
+
+    /**
+     * 得到用户信息
+     * @param token
+     * @return
+     */
+    @Override
+    public User getUser(String token) {
+        return (User) redisTemplate.opsForValue().get(token);
+    }
 }
