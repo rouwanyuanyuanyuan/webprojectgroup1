@@ -16,5 +16,9 @@
         bookId, bookName, bookAuthor, bookPrice, bookTypeId, bookDesc, isBorrowed, bookImg
     </sql>
 
-
+    <select id="selectAll" resultMap="BaseResultMap">
+        select bookId, bookName, bookAuthor,bookPrice, bookTypeId, bookDesc,isBorrowed, bookImg,
+               (select bookTypeName from book_type where book_type.bookTypeId = book_info.bookTypeId) as bookTypeName
+        from book_info
+    </select>
 </mapper>
