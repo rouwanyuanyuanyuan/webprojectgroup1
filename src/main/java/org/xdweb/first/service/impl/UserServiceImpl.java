@@ -43,6 +43,34 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public Integer register(String username, String password) {
+        User tmp = userMapper.selectByUsername(username);
+        if(tmp != null) return 0;  //账号重复
+
+        User user = new User();
+        user.setUsername(username);
+        user.setUserpassword(password);
+        user.setIsadmin((byte)0);
+        return userMapper.insertSelective(user);
+    }
+
+    /**
+     * 删除用户信息
+     * @param token
+     */
+    @Override
+    public void removeUser(String token) {
+        // 移除token
+        redisTemplate.delete(token);
+    }
+
+    /**
      * 得到用户信息
      * @param token
      * @return

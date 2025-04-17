@@ -24,4 +24,18 @@ public interface UserService {
      * @return
      */
     User getUser(String token);
+
+    /**
+     * 删除用户信息
+     * @param token
+     */
+    void removeUser(String token);
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    Integer register(String username, String password);
 }

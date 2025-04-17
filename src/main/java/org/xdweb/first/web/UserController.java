@@ -60,4 +60,30 @@ public class UserController {
             return MyResult.getResultMap(200, "获取用户信息成功", user);
         }
     }
+
+    /**
+     * 退出登录
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public Map<String, Object> logout(String token) {
+        log.info("用户退出登录,{}", token);
+        // 从redis中移除用户
+        userService.removeUser(token);
+        return MyResult.getResultMap(200, "退出登录成功" );
+    }
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "/register")
+    public Integer register(String username, String password){
+        log.info("用户注册,{}, {}", username, password);
+        return userService.register(username, password);
+    }
+
 }
