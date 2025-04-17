@@ -62,11 +62,4 @@ public interface BookInfoMapper {
      * @return
      */
     int selectCountByType(Map<String, Object> map);
-
-    /**
-     * 根据ID查询图书信息
-     * @param bookid
-     * @return
-     */
-    BookInfo selectByPrimaryKey(Integer bookid);
 }
