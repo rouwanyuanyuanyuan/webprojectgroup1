@@ -18,7 +18,7 @@ public class BorrowServiceImpl implements BorrowService {
     private BorrowMapper borrowMapper;
 
     @Override
-    public Integer getCount() {
+    public Integer getCount()s {
         return borrowMapper.selectCount();
     }
 
