@@ -2,6 +2,7 @@ package org.xdweb.first.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.xdweb.first.utils.MyResult;
 import org.xdweb.first.utils.TokenProcessor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -114,4 +116,25 @@ public class UserController {
             return 1;
         }
     }
+
+    /**
+     * 获得数量
+     * @return
+     */
+    @GetMapping(value = "/getCount")
+    public Integer getCount(){
+        log.info("获取用户数量");
+        return userService.getCount();
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @GetMapping(value = "/queryUsers")
+    public List<User> queryUsers(){
+        log.info("查询所有用户");
+        return userService.queryUsers();
+    }
+
 }

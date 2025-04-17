@@ -2,6 +2,8 @@ package org.xdweb.first.service;
 
 import org.xdweb.first.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -45,4 +47,16 @@ public interface UserService {
      * @param newPassword
      */
     void setPassword(Integer userid, String newPassword);
+
+    /**
+     * 获取用户数量
+     * @return
+     */
+    Integer getCount();
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<User> queryUsers();
 }

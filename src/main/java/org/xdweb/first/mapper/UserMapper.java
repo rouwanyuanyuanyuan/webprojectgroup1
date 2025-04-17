@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.xdweb.first.model.User;
 
+import java.util.List;
+
 public interface UserMapper {
 
     /**
@@ -37,4 +39,17 @@ public interface UserMapper {
      * @param user
      */
     void updateByPrimaryKeySelective(User user);
+
+    /**
+     * 查询用户数量
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM user")
+    Integer selectCount();
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<User> selectAll();
 }

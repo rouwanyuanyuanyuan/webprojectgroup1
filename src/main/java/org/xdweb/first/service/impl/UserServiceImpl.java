@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -95,5 +97,21 @@ public class UserServiceImpl implements UserService {
         return (User) redisTemplate.opsForValue().get(token);
     }
 
+    /**
+     * 获取用户数量
+     * @return
+     */
+    @Override
+    public Integer getCount() {
+        return userMapper.selectCount();
+    }
 
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Override
+    public List<User> queryUsers() {
+        return userMapper.selectAll();
+    }
 }
