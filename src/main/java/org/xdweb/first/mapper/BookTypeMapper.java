@@ -66,5 +66,12 @@ public interface BookTypeMapper {
      */
     int deleteByPrimaryKey(Integer booktypeid);
 
+    /**
+     * 更新图书类型（根据主键）
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(BookType record);
 
+    int updateByPrimaryKey(BookType record);
 }

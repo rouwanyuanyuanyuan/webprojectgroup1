@@ -78,4 +78,14 @@ public class BookTypeController {
         return bookTypeService.deleteBookTypes(bookTypes);
     }
 
+    /**
+     * 更新类型
+     * @param bookType
+     * @return
+     */
+    @PutMapping(value = "/updateBookType")
+    public Integer updateBookType(@RequestBody BookType bookType){
+        return bookTypeService.updateBookType(bookType);
+    }
+
 }

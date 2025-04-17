@@ -102,4 +102,14 @@ public class  BookTypeServiceImpl implements BookTypeService {
         }
         return count;
     }
+
+    /**
+     * 更新类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer updateBookType(BookType bookType) {
+        return bookTypeMapper.updateByPrimaryKeySelective(bookType);
+    }
 }
