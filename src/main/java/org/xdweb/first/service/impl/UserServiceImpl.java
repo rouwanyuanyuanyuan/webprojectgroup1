@@ -10,6 +10,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -134,5 +135,42 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> searchUsersByPage(Map<String, Object> params) {
         return userMapper.selectBySearch(params);
+    }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer addUser(User user) {
+        return userMapper.insertSelective(user);
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer deleteUser(User user) {
+        if(user.getUserid() == 1) return -2;
+        Map<String, Object> map = new HashMap<>();
+        map.put("userid", user.getUserid());
+        // 判断是否有借阅记录
+//        if(borrowMapper.selectCountBySearch(map) > 0) {
+//            return -1;
+//        }
+        return userMapper.deleteByPrimaryKey(user.getUserid());
+    }
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }
