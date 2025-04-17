@@ -68,5 +68,24 @@ public class  BookTypeServiceImpl implements BookTypeService {
         return bookTypeMapper.insertSelective(bookType);
     }
 
-
+    /**
+     * 删除类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer deleteBookType(BookType bookType) {
+        int count = 0;
+        try{
+            Map<String, Object> map = new HashMap<>();
+            map.put("booktypeid", bookType.getBooktypeid());
+            if(bookInfoMapper.selectCountByType(map) > 0) {
+                return -1;
+            }
+            count = bookTypeMapper.deleteByPrimaryKey(bookType.getBooktypeid());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

@@ -39,4 +39,11 @@ public interface BookTypeService {
      */
     Integer addBookType(BookType bookType);
 
+    /**
+     * 删除类型
+     * @param bookType
+     * @return
+     */
+    Integer deleteBookType(BookType bookType);
+
 }

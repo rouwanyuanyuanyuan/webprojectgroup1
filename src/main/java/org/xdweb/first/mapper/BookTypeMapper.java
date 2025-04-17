@@ -58,4 +58,13 @@ public interface BookTypeMapper {
      * @return
      */
     int insertSelective(BookType record);
+
+    /**
+     * 删除图书类型（根据主键）
+     * @param booktypeid
+     * @return
+     */
+    int deleteByPrimaryKey(Integer booktypeid);
+
+
 }

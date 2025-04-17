@@ -83,4 +83,8 @@
     </trim>
   </insert>
 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book_type
+    where bookTypeId = #{booktypeid,jdbcType=INTEGER}
+  </delete>
 </mapper>
