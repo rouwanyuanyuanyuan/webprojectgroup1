@@ -173,4 +173,18 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user) {
         userMapper.updateByPrimaryKeySelective(user);
     }
+
+    /**
+     * 批量删除用户
+     * @param users
+     * @return
+     */
+    @Override
+    public Integer deleteUsers(List<User> users) {
+        int count = 0;
+        for(User user : users) {
+            count += deleteUser(user);
+        }
+        return count;
+    }
 }

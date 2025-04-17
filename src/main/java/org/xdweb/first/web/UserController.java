@@ -182,4 +182,16 @@ public class UserController {
         userService.updateUser(user);
         return 1;
     }
+
+    /**
+     * 批量删除用户
+     * @param users
+     * @return
+     */
+    @DeleteMapping(value = "/deleteUsers")
+    public Integer deleteUsers(@RequestBody List<User> users){
+        log.info("批量删除用户,{}", users);
+        return userService.deleteUsers(users);
+    }
+
 }

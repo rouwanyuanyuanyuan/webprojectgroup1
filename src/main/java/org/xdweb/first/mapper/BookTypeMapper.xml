@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rabbiter.bms.mapper.BookTypeMapper">
-  <resultMap id="BaseResultMap" type="com.rabbiter.bms.model.BookType">
+<mapper namespace="org.xdweb.first.mapper.BookTypeMapper">
+  <resultMap id="BaseResultMap" type="org.xdweb.first.model.BookType">
     <id column="bookTypeId" jdbcType="INTEGER" property="booktypeid" />
     <result column="bookTypeName" jdbcType="VARCHAR" property="booktypename" />
     <result column="bookTypeDesc" jdbcType="VARCHAR" property="booktypedesc" />

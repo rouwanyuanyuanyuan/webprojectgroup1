@@ -95,4 +95,11 @@ public interface UserService {
      * @return
      */
     void updateUser(User user);
+
+    /**
+     * 批量删除用户
+     * @param users
+     * @return
+     */
+    Integer deleteUsers(List<User> users);
 }
