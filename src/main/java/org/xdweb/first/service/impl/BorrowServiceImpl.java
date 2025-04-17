@@ -1,8 +1,8 @@
-package com.rabbiter.bms.service.impl;
+package org.xdweb.first.service.impl;
 
-import com.rabbiter.bms.mapper.BorrowMapper;
-import com.rabbiter.bms.model.Borrow;
-import com.rabbiter.bms.service.BorrowService;
+import org.xdweb.first.mapper.BorrowMapper;
+import org.xdweb.first.model.Borrow;
+import org.xdweb.first.service.BorrowService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
