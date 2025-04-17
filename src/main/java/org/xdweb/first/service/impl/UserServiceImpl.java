@@ -1,6 +1,7 @@
 package org.xdweb.first.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.xdweb.first.mapper.UserMapper;
 import org.xdweb.first.model.User;
 import org.xdweb.first.service.UserService;
@@ -8,6 +9,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -43,6 +47,48 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 修改密码
+     * @param userid
+     * @param newPassword
+     */
+    @Override
+    public void setPassword(Integer userid, String newPassword) {
+        User user = User.builder()
+                .userid(userid)
+                .userpassword(newPassword)
+                .build();
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public Integer register(String username, String password) {
+        User tmp = userMapper.selectByUsername(username);
+        if(tmp != null) return 0;  //账号重复
+
+        User user = new User();
+        user.setUsername(username);
+        user.setUserpassword(password);
+        user.setIsadmin((byte)0);
+        return userMapper.insertSelective(user);
+    }
+
+    /**
+     * 删除用户信息
+     * @param token
+     */
+    @Override
+    public void removeUser(String token) {
+        // 移除token
+        redisTemplate.delete(token);
+    }
+
+    /**
      * 得到用户信息
      * @param token
      * @return
@@ -50,5 +96,43 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String token) {
         return (User) redisTemplate.opsForValue().get(token);
+    }
+
+    /**
+     * 获取用户数量
+     * @return
+     */
+    @Override
+    public Integer getCount() {
+        return userMapper.selectCount();
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Override
+    public List<User> queryUsers() {
+        return userMapper.selectAll();
+    }
+
+    /**
+     * 得到搜索用户数量
+     * @param params
+     * @return
+     */
+    @Override
+    public int getSearchCount(Map<String, Object> params) {
+        return userMapper.selectCountBySearch(params);
+    }
+
+    /**
+     * 分页查询用户
+     * @param params
+     * @return
+     */
+    @Override
+    public List<User> searchUsersByPage(Map<String, Object> params) {
+        return userMapper.selectBySearch(params);
     }
 }

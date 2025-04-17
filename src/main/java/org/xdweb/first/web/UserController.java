@@ -2,15 +2,15 @@ package org.xdweb.first.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xdweb.first.model.User;
 import org.xdweb.first.service.UserService;
 import org.xdweb.first.utils.MyResult;
+import org.xdweb.first.utils.MyUtils;
 import org.xdweb.first.utils.TokenProcessor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -59,5 +59,92 @@ public class UserController {
         } else {    // 获取成功
             return MyResult.getResultMap(200, "获取用户信息成功", user);
         }
+    }
+
+    /**
+     * 退出登录
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public Map<String, Object> logout(String token) {
+        log.info("用户退出登录,{}", token);
+        // 从redis中移除用户
+        userService.removeUser(token);
+        return MyResult.getResultMap(200, "退出登录成功" );
+    }
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "/register")
+    public Integer register(String username, String password){
+        log.info("用户注册,{}, {}", username, password);
+        return userService.register(username, password);
+    }
+
+    /**
+     * 修改密码
+     * @param userid
+     * @param username
+     * @param isadmin
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    @RequestMapping(value = {"/alterPassword", "reader/alterPassword"})
+    public Integer alterPassword(Integer userid, String username, Byte isadmin, String oldPassword, String newPassword){
+        log.info("修改密码，{}, {}, {}, {}, {}", userid, username, isadmin, oldPassword, newPassword);
+        //检查旧密码是否正确
+        User userObj = User.builder()
+                .isadmin(isadmin)
+                .userid(userid)
+                .username(username)
+                .userpassword(oldPassword)
+                .build();
+
+        User user = userService.login(userObj);
+        if(user == null) {  //旧密码不正确
+            return 0;
+        } else {    //旧密码正确，设置新密码
+            userService.setPassword(userObj.getUserid(), newPassword);
+            return 1;
+        }
+    }
+
+    /**
+     * 获得数量
+     * @return
+     */
+    @GetMapping(value = "/getCount")
+    public Integer getCount(){
+        log.info("获取用户数量");
+        return userService.getCount();
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @GetMapping(value = "/queryUsers")
+    public List<User> queryUsers(){
+        log.info("查询所有用户");
+        return userService.queryUsers();
+    }
+
+    /**
+     * 分页查询用户
+     * @param params
+     * @return
+     */
+    @GetMapping(value = "/queryUsersByPage")
+    public Map<String, Object> queryUsersByPage(@RequestParam Map<String, Object> params){
+        MyUtils.parsePageParams(params);
+        int count = userService.getSearchCount(params);
+        List<User> users = userService.searchUsersByPage(params);
+        return MyResult.getListResultMap(0, "success", count, users);
     }
 }

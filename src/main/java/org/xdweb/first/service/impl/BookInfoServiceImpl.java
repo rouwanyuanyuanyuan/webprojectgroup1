@@ -1,5 +1,7 @@
 package org.xdweb.first.service.impl;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.xdweb.first.mapper.BookInfoMapper;
 import org.xdweb.first.model.BookInfo;
 import org.xdweb.first.service.BookInfoService;
@@ -95,5 +97,19 @@ public class BookInfoServiceImpl implements BookInfoService {
     @Override
     public List<BookInfo> queryBookInfos() {
         return bookInfoMapper.selectAll();
+    }
+
+    /**
+     * 批量删除图书信息
+     * @param bookInfos
+     * @return
+     */
+    @Override
+    public Integer deleteBookInfos(List<BookInfo> bookInfos) {
+        int count = 0;
+        for(BookInfo bookInfo : bookInfos) {
+            count += deleteBookInfo(bookInfo);
+        }
+        return count;
     }
 }
