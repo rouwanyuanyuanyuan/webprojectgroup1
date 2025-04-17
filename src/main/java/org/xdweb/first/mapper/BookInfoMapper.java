@@ -55,4 +55,11 @@ public interface BookInfoMapper {
      * @return
      */
     Integer updateByPrimaryKeySelective(BookInfo bookInfo);
+
+    /**
+     * 查询图书种类
+     * @param map
+     * @return
+     */
+    int selectCountByType(Map<String, Object> map);
 }
