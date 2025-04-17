@@ -2,13 +2,11 @@ package org.xdweb.first.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xdweb.first.model.User;
 import org.xdweb.first.service.UserService;
 import org.xdweb.first.utils.MyResult;
+import org.xdweb.first.utils.MyUtils;
 import org.xdweb.first.utils.TokenProcessor;
 
 import java.util.HashMap;
@@ -137,4 +135,16 @@ public class UserController {
         return userService.queryUsers();
     }
 
+    /**
+     * 分页查询用户
+     * @param params
+     * @return
+     */
+    @GetMapping(value = "/queryUsersByPage")
+    public Map<String, Object> queryUsersByPage(@RequestParam Map<String, Object> params){
+        MyUtils.parsePageParams(params);
+        int count = userService.getSearchCount(params);
+        List<User> users = userService.searchUsersByPage(params);
+        return MyResult.getListResultMap(0, "success", count, users);
+    }
 }

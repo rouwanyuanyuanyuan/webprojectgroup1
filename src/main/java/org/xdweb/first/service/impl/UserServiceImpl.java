@@ -11,6 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -113,5 +114,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> queryUsers() {
         return userMapper.selectAll();
+    }
+
+    /**
+     * 得到搜索用户数量
+     * @param params
+     * @return
+     */
+    @Override
+    public int getSearchCount(Map<String, Object> params) {
+        return userMapper.selectCountBySearch(params);
+    }
+
+    /**
+     * 分页查询用户
+     * @param params
+     * @return
+     */
+    @Override
+    public List<User> searchUsersByPage(Map<String, Object> params) {
+        return userMapper.selectBySearch(params);
     }
 }

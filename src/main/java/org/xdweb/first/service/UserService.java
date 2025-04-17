@@ -3,6 +3,7 @@ package org.xdweb.first.service;
 import org.xdweb.first.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -59,4 +60,18 @@ public interface UserService {
      * @return
      */
     List<User> queryUsers();
+
+    /**
+     * 得到搜索用户数量
+     * @param params
+     * @return
+     */
+    int getSearchCount(Map<String, Object> params);
+
+    /**
+     * 分页查询用户
+     * @param params
+     * @return
+     */
+    List<User> searchUsersByPage(Map<String, Object> params);
 }

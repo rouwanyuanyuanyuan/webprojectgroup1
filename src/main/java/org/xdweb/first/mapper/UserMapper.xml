@@ -73,4 +73,24 @@
         select <include refid="Base_Column_List" />
         from user
     </select>
+
+    <select id="selectCountBySearch" resultType="int">
+        select count(*) from user
+        <where>
+            <if test="username != null and username != '' ">
+                and userName like concat('%',#{username},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBySearch" resultMap="BaseResultMap">
+        select userId, userName, userPassword, isAdmin
+        from user
+        <where>
+            <if test="username != null and username != '' ">
+                and userName like concat('%',#{username},'%')
+            </if>
+        </where>
+        limit #{begin}, #{size}
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.xdweb.first.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -52,4 +53,18 @@ public interface UserMapper {
      * @return
      */
     List<User> selectAll();
+
+    /**
+     * 根据主键查询
+     * @param params
+     * @return
+     */
+    int selectCountBySearch(Map<String, Object> params);
+
+    /**
+     * 分页查询
+     * @param params
+     * @return
+     */
+    List<User> selectBySearch(Map<String, Object> params);
 }
