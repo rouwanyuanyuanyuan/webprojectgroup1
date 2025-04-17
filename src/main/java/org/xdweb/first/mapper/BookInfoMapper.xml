@@ -143,4 +143,12 @@
         </set>
         where bookId = #{bookid,jdbcType=INTEGER}
     </update>
+    <select id="selectCountByType" resultType="int">
+        select count(*) from book_info
+        <where>
+            <if test="booktypeid != null and booktypeid != '' ">
+                and bookTypeId = #{booktypeid}
+            </if>
+        </where>
+    </select>
 </mapper>
