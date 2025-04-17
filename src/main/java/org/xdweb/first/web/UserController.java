@@ -86,4 +86,32 @@ public class UserController {
         return userService.register(username, password);
     }
 
+    /**
+     * 修改密码
+     * @param userid
+     * @param username
+     * @param isadmin
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    @RequestMapping(value = {"/alterPassword", "reader/alterPassword"})
+    public Integer alterPassword(Integer userid, String username, Byte isadmin, String oldPassword, String newPassword){
+        log.info("修改密码，{}, {}, {}, {}, {}", userid, username, isadmin, oldPassword, newPassword);
+        //检查旧密码是否正确
+        User userObj = User.builder()
+                .isadmin(isadmin)
+                .userid(userid)
+                .username(username)
+                .userpassword(oldPassword)
+                .build();
+
+        User user = userService.login(userObj);
+        if(user == null) {  //旧密码不正确
+            return 0;
+        } else {    //旧密码正确，设置新密码
+            userService.setPassword(userObj.getUserid(), newPassword);
+            return 1;
+        }
+    }
 }

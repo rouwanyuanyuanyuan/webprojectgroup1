@@ -38,4 +38,11 @@ public interface UserService {
      * @return
      */
     Integer register(String username, String password);
+
+    /**
+     * 修改密码
+     * @param userid
+     * @param newPassword
+     */
+    void setPassword(Integer userid, String newPassword);
 }

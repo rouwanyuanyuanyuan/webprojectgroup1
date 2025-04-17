@@ -31,4 +31,10 @@ public interface UserMapper {
      * @return
      */
     Integer insertSelective(User user);
+
+    /**
+     * 修改用户信息
+     * @param user
+     */
+    void updateByPrimaryKeySelective(User user);
 }

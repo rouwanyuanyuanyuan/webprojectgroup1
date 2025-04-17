@@ -1,6 +1,7 @@
 package org.xdweb.first.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.xdweb.first.mapper.UserMapper;
 import org.xdweb.first.model.User;
 import org.xdweb.first.service.UserService;
@@ -43,6 +44,20 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 修改密码
+     * @param userid
+     * @param newPassword
+     */
+    @Override
+    public void setPassword(Integer userid, String newPassword) {
+        User user = User.builder()
+                .userid(userid)
+                .userpassword(newPassword)
+                .build();
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
      * 注册
      * @param username
      * @param password
@@ -79,4 +94,6 @@ public class UserServiceImpl implements UserService {
     public User getUser(String token) {
         return (User) redisTemplate.opsForValue().get(token);
     }
+
+
 }
