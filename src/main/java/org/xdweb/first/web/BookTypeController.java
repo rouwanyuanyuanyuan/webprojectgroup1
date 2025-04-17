@@ -48,5 +48,44 @@ public class BookTypeController {
         return MyResult.getListResultMap(0, "success", count, bookTypes);
     }
 
+    /**
+     *添加类型
+     * @param bookType
+     * @return
+     */
+    @PostMapping(value = "/addBookType")
+    public Integer addBookType(@RequestBody BookType bookType){
+        return bookTypeService.addBookType(bookType);
+    }
+
+    /**
+     * 删除类型
+     * @param bookType
+     * @return
+     */
+    @DeleteMapping(value = "/deleteBookType")
+    public Integer deleteBookType(@RequestBody BookType bookType){
+        return bookTypeService.deleteBookType(bookType);
+    }
+
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    @DeleteMapping(value = "/deleteBookTypes")
+    public Integer deleteBookTypes(@RequestBody List<BookType> bookTypes){
+        return bookTypeService.deleteBookTypes(bookTypes);
+    }
+
+    /**
+     * 更新类型
+     * @param bookType
+     * @return
+     */
+    @PutMapping(value = "/updateBookType")
+    public Integer updateBookType(@RequestBody BookType bookType){
+        return bookTypeService.updateBookType(bookType);
+    }
 
 }

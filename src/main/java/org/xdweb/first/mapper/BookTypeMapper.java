@@ -49,4 +49,29 @@ public interface BookTypeMapper {
      * @return
      */
     List<BookType> selectBySearch(Map<String, Object> searchParam);
+
+    int insert(BookType record);
+
+    /**
+     * 添加图书类型
+     * @param record
+     * @return
+     */
+    int insertSelective(BookType record);
+
+    /**
+     * 删除图书类型（根据主键）
+     * @param booktypeid
+     * @return
+     */
+    int deleteByPrimaryKey(Integer booktypeid);
+
+    /**
+     * 更新图书类型（根据主键）
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(BookType record);
+
+    int updateByPrimaryKey(BookType record);
 }
