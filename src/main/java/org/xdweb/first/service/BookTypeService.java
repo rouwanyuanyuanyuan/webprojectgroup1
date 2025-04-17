@@ -32,5 +32,32 @@ public interface BookTypeService {
      */
     List<BookType> queryBookTypes();
 
+    /**
+     * 添加类型
+     * @param bookType
+     * @return
+     */
+    Integer addBookType(BookType bookType);
+
+    /**
+     * 删除类型
+     * @param bookType
+     * @return
+     */
+    Integer deleteBookType(BookType bookType);
+
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    Integer deleteBookTypes(List<BookType> bookTypes);
+
+    /**
+     * 更新类型
+     * @param bookType
+     * @return
+     */
+    Integer updateBookType(BookType bookType);
 
 }

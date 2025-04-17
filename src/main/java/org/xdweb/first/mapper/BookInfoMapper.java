@@ -2,6 +2,7 @@ package org.xdweb.first.mapper;
 
 import org.apache.ibatis.annotations.Select;
 import org.xdweb.first.model.BookInfo;
+import org.xdweb.first.model.BookType;
 
 import java.util.List;
 import java.util.Map;

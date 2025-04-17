@@ -58,4 +58,58 @@ public class  BookTypeServiceImpl implements BookTypeService {
         return bookTypeMapper.selectAll();
     }
 
+    /**
+     * 添加类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer addBookType(BookType bookType) {
+        return bookTypeMapper.insertSelective(bookType);
+    }
+
+    /**
+     * 删除类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer deleteBookType(BookType bookType) {
+        int count = 0;
+        try{
+            Map<String, Object> map = new HashMap<>();
+            map.put("booktypeid", bookType.getBooktypeid());
+            if(bookInfoMapper.selectCountByType(map) > 0) {
+                return -1;
+            }
+            count = bookTypeMapper.deleteByPrimaryKey(bookType.getBooktypeid());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    @Override
+    public Integer deleteBookTypes(List<BookType> bookTypes) {
+        int count = 0;
+        for(BookType bookType : bookTypes) {
+            count += deleteBookType(bookType);
+        }
+        return count;
+    }
+
+    /**
+     * 更新类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer updateBookType(BookType bookType) {
+        return bookTypeMapper.updateByPrimaryKeySelective(bookType);
+    }
 }
