@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,48 @@ public class BookInfoServiceImpl implements BookInfoService {
     @Override
     public List<BookInfo> searchBookInfosByPage(Map<String, Object> params) {
         return bookInfoMapper.selectBySearch(params);
+    }
+
+    /**
+     * 添加图书信息
+     * @param bookInfo
+     * @return
+     */
+    @Override
+    public Integer addBookInfo(BookInfo bookInfo) {
+        return bookInfoMapper.insertSelective(bookInfo);
+    }
+
+    /**
+     * 删除图书信息
+     * @param bookInfo
+     * @return
+     */
+    @Override
+    public Integer deleteBookInfo(BookInfo bookInfo) {
+        int count = 0;
+        try{
+            Map<String, Object> map = new HashMap<>();
+            map.put("bookId", bookInfo.getBookid());
+            // 判断是否有借阅记录
+//            if(borrowMapper.selectCountBySearch(map) > 0) {
+//                return -1;
+//            }
+            count = bookInfoMapper.deleteByPrimaryKey(bookInfo.getBookid());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    /**
+     * 更新图书信息
+     * @param bookInfo
+     * @return
+     */
+    @Override
+    public Integer updateBookInfo(BookInfo bookInfo) {
+        return bookInfoMapper.updateByPrimaryKeySelective(bookInfo);
     }
 
     /**

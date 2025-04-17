@@ -1,10 +1,7 @@
 package org.xdweb.first.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xdweb.first.model.BookInfo;
 import org.xdweb.first.service.BookInfoService;
 import org.xdweb.first.utils.MyResult;
@@ -53,5 +50,38 @@ public class BookInfoController {
         int count = bookInfoService.getSearchCount(params);  // 获得总数
         List<BookInfo> bookInfos = bookInfoService.searchBookInfosByPage(params);  // 分页查询
         return MyResult.getListResultMap(0, "success", count, bookInfos);
+    }
+
+    /**
+     * 添加图书信息
+     * @param bookInfo
+     * @return
+     */
+    @PostMapping(value = "/addBookInfo")
+    public Integer addBookInfo(@RequestBody BookInfo bookInfo){
+        log.info("添加图书信息,{}", bookInfo);
+        return bookInfoService.addBookInfo(bookInfo);
+    }
+
+    /**
+     * 删除图书信息
+     * @param bookInfo
+     * @return
+     */
+    @DeleteMapping(value = "/deleteBookInfo")
+    public Integer deleteBookInfo(@RequestBody BookInfo bookInfo){
+        log.info("删除图书信息,{}", bookInfo);
+        return bookInfoService.deleteBookInfo(bookInfo);
+    }
+
+    /**
+     * 修改图书信息
+     * @param bookInfo
+     * @return
+     */
+    @PutMapping(value = "/updateBookInfo")
+    public Integer updateBookInfo(@RequestBody BookInfo bookInfo){
+        log.info("修改图书信息,{}", bookInfo);
+        return bookInfoService.updateBookInfo(bookInfo);
     }
 }

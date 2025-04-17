@@ -32,4 +32,25 @@ public interface BookInfoService {
      * @return
      */
     List<BookInfo> searchBookInfosByPage(Map<String, Object> params);
+
+    /**
+     * 添加图书信息
+     * @param bookInfo
+     * @return
+     */
+    Integer addBookInfo(BookInfo bookInfo);
+
+    /**
+     * 删除图书信息
+     * @param bookInfo
+     * @return
+     */
+    Integer deleteBookInfo(BookInfo bookInfo);
+
+    /**
+     * 更新图书信息
+     * @param bookInfo
+     * @return
+     */
+    Integer updateBookInfo(BookInfo bookInfo);
 }

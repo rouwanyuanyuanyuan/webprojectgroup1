@@ -34,4 +34,25 @@ public interface BookInfoMapper {
      * @return
      */
     List<BookInfo> selectBySearch(Map<String, Object> params);
+
+    /**
+     * 根据主键查询
+     * @param bookInfo
+     * @return
+     */
+    Integer insertSelective(BookInfo bookInfo);
+
+    /**
+     * 删除图书信息
+     * @param bookid
+     * @return
+     */
+    int deleteByPrimaryKey(Integer bookid);
+
+    /**
+     * 更新图书信息
+     * @param bookInfo
+     * @return
+     */
+    Integer updateByPrimaryKeySelective(BookInfo bookInfo);
 }

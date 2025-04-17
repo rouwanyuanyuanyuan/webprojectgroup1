@@ -54,4 +54,93 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertSelective" parameterType="org.xdweb.first.model.BookInfo">
+        insert into book_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookid != null">
+                bookId,
+            </if>
+            <if test="bookname != null">
+                bookName,
+            </if>
+            <if test="bookauthor != null">
+                bookAuthor,
+            </if>
+            <if test="bookprice != null">
+                bookPrice,
+            </if>
+            <if test="booktypeid != null">
+                bookTypeId,
+            </if>
+            <if test="bookdesc != null">
+                bookDesc,
+            </if>
+            <if test="isborrowed != null">
+                isBorrowed,
+            </if>
+            <if test="bookimg != null">
+                bookImg,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bookid != null">
+                #{bookid,jdbcType=INTEGER},
+            </if>
+            <if test="bookname != null">
+                #{bookname,jdbcType=VARCHAR},
+            </if>
+            <if test="bookauthor != null">
+                #{bookauthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookprice != null">
+                #{bookprice,jdbcType=DECIMAL},
+            </if>
+            <if test="booktypeid != null">
+                #{booktypeid,jdbcType=INTEGER},
+            </if>
+            <if test="bookdesc != null">
+                #{bookdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isborrowed != null">
+                #{isborrowed,jdbcType=TINYINT},
+            </if>
+            <if test="bookimg != null">
+                #{bookimg,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from book_info
+        where bookId = #{bookid,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="org.xdweb.first.model.BookInfo">
+        update book_info
+        <set>
+            <if test="bookname != null">
+                bookName = #{bookname,jdbcType=VARCHAR},
+            </if>
+            <if test="bookauthor != null">
+                bookAuthor = #{bookauthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookprice != null">
+                bookPrice = #{bookprice,jdbcType=DECIMAL},
+            </if>
+            <if test="booktypeid != null">
+                bookTypeId = #{booktypeid,jdbcType=INTEGER},
+            </if>
+            <if test="bookdesc != null">
+                bookDesc = #{bookdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isborrowed != null">
+                isBorrowed = #{isborrowed,jdbcType=TINYINT},
+            </if>
+            <if test="bookimg != null">
+                bookImg = #{bookimg,jdbcType=TINYINT},
+            </if>
+        </set>
+        where bookId = #{bookid,jdbcType=INTEGER}
+    </update>
 </mapper>
