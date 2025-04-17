@@ -68,4 +68,14 @@ public class BookTypeController {
         return bookTypeService.deleteBookType(bookType);
     }
 
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    @DeleteMapping(value = "/deleteBookTypes")
+    public Integer deleteBookTypes(@RequestBody List<BookType> bookTypes){
+        return bookTypeService.deleteBookTypes(bookTypes);
+    }
+
 }

@@ -88,4 +88,18 @@ public class  BookTypeServiceImpl implements BookTypeService {
         }
         return count;
     }
+
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    @Override
+    public Integer deleteBookTypes(List<BookType> bookTypes) {
+        int count = 0;
+        for(BookType bookType : bookTypes) {
+            count += deleteBookType(bookType);
+        }
+        return count;
+    }
 }

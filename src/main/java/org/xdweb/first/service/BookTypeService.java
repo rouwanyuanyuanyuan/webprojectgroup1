@@ -46,4 +46,11 @@ public interface BookTypeService {
      */
     Integer deleteBookType(BookType bookType);
 
+    /**
+     * 批量删除类型
+     * @param bookTypes
+     * @return
+     */
+    Integer deleteBookTypes(List<BookType> bookTypes);
+
 }
