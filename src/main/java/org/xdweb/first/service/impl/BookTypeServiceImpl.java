@@ -58,4 +58,15 @@ public class  BookTypeServiceImpl implements BookTypeService {
         return bookTypeMapper.selectAll();
     }
 
+    /**
+     * 添加类型
+     * @param bookType
+     * @return
+     */
+    @Override
+    public Integer addBookType(BookType bookType) {
+        return bookTypeMapper.insertSelective(bookType);
+    }
+
+
 }

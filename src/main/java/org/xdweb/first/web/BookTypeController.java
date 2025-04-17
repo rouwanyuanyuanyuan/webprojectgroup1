@@ -48,5 +48,14 @@ public class BookTypeController {
         return MyResult.getListResultMap(0, "success", count, bookTypes);
     }
 
+    /**
+     *添加类型
+     * @param bookType
+     * @return
+     */
+    @PostMapping(value = "/addBookType")
+    public Integer addBookType(@RequestBody BookType bookType){
+        return bookTypeService.addBookType(bookType);
+    }
 
 }

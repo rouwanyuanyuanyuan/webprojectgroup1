@@ -50,4 +50,37 @@
     </where>
     limit #{begin}, #{size}
   </select>
+  <insert id="insert" parameterType="com.rabbiter.bms.model.BookType">
+    insert into book_type (bookTypeId, bookTypeName, bookTypeDesc
+    )
+    values (#{booktypeid,jdbcType=INTEGER}, #{booktypename,jdbcType=VARCHAR}, #{booktypedesc,jdbcType=VARCHAR}
+           )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.rabbiter.bms.model.BookType">
+    insert into book_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="booktypeid != null">
+        bookTypeId,
+      </if>
+      <if test="booktypename != null">
+        bookTypeName,
+      </if>
+      <if test="booktypedesc != null">
+        bookTypeDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="booktypeid != null">
+        #{booktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="booktypename != null">
+        #{booktypename,jdbcType=VARCHAR},
+      </if>
+      <if test="booktypedesc != null">
+        #{booktypedesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
 </mapper>

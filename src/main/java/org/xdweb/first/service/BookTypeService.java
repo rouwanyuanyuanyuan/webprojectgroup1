@@ -32,5 +32,11 @@ public interface BookTypeService {
      */
     List<BookType> queryBookTypes();
 
+    /**
+     * 添加类型
+     * @param bookType
+     * @return
+     */
+    Integer addBookType(BookType bookType);
 
 }
