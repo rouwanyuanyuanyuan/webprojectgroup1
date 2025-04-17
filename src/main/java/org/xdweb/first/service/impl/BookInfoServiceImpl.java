@@ -79,7 +79,11 @@ public class BookInfoServiceImpl implements BookInfoService {
         }
         return count;
     }
-
+    
+    @Override
+    public BookInfo queryBookInfoById(Integer bookid) {
+        return bookInfoMapper.selectByPrimaryKey(bookid);
+    }
     /**
      * 更新图书信息
      * @param bookInfo
