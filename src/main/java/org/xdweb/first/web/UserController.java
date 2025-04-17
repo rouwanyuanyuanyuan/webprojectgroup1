@@ -142,9 +142,56 @@ public class UserController {
      */
     @GetMapping(value = "/queryUsersByPage")
     public Map<String, Object> queryUsersByPage(@RequestParam Map<String, Object> params){
+        log.info("分页查询用户,{}", params);
         MyUtils.parsePageParams(params);
         int count = userService.getSearchCount(params);
         List<User> users = userService.searchUsersByPage(params);
         return MyResult.getListResultMap(0, "success", count, users);
     }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @PostMapping(value = "/addUser")
+    public Integer addUser(@RequestBody User user){
+        log.info("添加用户,{}", user);
+        return userService.addUser(user);
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    @DeleteMapping(value = "/deleteUser")
+    public Integer deleteUser(@RequestBody User user){
+        log.info("删除用户,{}", user);
+        return userService.deleteUser(user);
+    }
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/updateUser")
+    public Integer updateUser(@RequestBody User user){
+        log.info("更新用户,{}", user);
+        userService.updateUser(user);
+        return 1;
+    }
+
+    /**
+     * 批量删除用户
+     * @param users
+     * @return
+     */
+    @DeleteMapping(value = "/deleteUsers")
+    public Integer deleteUsers(@RequestBody List<User> users){
+        log.info("批量删除用户,{}", users);
+        return userService.deleteUsers(users);
+    }
+
 }

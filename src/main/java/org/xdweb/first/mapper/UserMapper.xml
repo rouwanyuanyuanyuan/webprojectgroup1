@@ -93,4 +93,9 @@
         </where>
         limit #{begin}, #{size}
     </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from user
+        where userId = #{userid,jdbcType=INTEGER}
+    </delete>
 </mapper>

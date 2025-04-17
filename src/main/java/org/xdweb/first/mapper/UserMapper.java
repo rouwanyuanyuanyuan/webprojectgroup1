@@ -67,4 +67,11 @@ public interface UserMapper {
      * @return
      */
     List<User> selectBySearch(Map<String, Object> params);
+
+    /**
+     * 根据主键删除用户
+     * @param userid
+     * @return
+     */
+    Integer deleteByPrimaryKey(Integer userid);
 }

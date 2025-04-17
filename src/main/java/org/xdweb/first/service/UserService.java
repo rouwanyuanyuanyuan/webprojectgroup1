@@ -74,4 +74,32 @@ public interface UserService {
      * @return
      */
     List<User> searchUsersByPage(Map<String, Object> params);
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    Integer addUser(User user);
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    Integer deleteUser(User user);
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    void updateUser(User user);
+
+    /**
+     * 批量删除用户
+     * @param users
+     * @return
+     */
+    Integer deleteUsers(List<User> users);
 }
