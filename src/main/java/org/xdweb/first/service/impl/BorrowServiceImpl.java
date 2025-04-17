@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class BorrowServiceImpl implements BorrowService {
     private BorrowMapper borrowMapper;
 
     @Override
-    public Integer getCount()s {
+    public Integer getCount() {
         return borrowMapper.selectCount();
     }
 
@@ -44,8 +45,17 @@ public class BorrowServiceImpl implements BorrowService {
         // 将string类型的时间重新调整
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
-            borrow.setBorrowtime(simpleDateFormat.parse(borrow.getBorrowtimestr()));
-            borrow.setReturntime(simpleDateFormat.parse(borrow.getReturntimestr()));
+            // 如果没有提供借阅时间字符串，则设置为当前时间
+            if (borrow.getBorrowtimestr() == null) {
+                borrow.setBorrowtime(new Date(System.currentTimeMillis()));
+            } else {
+                borrow.setBorrowtime(simpleDateFormat.parse(borrow.getBorrowtimestr()));
+            }
+            
+            // 如果有归还时间字符串，才进行解析
+            if (borrow.getReturntimestr() != null) {
+                borrow.setReturntime(simpleDateFormat.parse(borrow.getReturntimestr()));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -80,8 +90,15 @@ public class BorrowServiceImpl implements BorrowService {
         // 将string类型的时间重新调整
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
-            borrow.setBorrowtime(simpleDateFormat.parse(borrow.getBorrowtimestr()));
-            borrow.setReturntime(simpleDateFormat.parse(borrow.getReturntimestr()));
+            // 只有在借阅时间字符串不为null时解析
+            if (borrow.getBorrowtimestr() != null) {
+                borrow.setBorrowtime(simpleDateFormat.parse(borrow.getBorrowtimestr()));
+            }
+            
+            // 只有在归还时间字符串不为null时解析
+            if (borrow.getReturntimestr() != null) {
+                borrow.setReturntime(simpleDateFormat.parse(borrow.getReturntimestr()));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -11,10 +11,7 @@ import org.xdweb.first.model.BookInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +27,7 @@ public class BorrowController {
     BookInfoService bookInfoService;
 
     // 分页查询借阅 params: {page, limit, userid, bookid}
-    @RequestMapping(value = "/queryBorrowsByPage")
+    @GetMapping(value = "/queryBorrowsByPage")
     public Map<String, Object> queryBorrowsByPage(@RequestParam Map<String, Object> params){
         MyUtils.parsePageParams(params);
         int count = borrowService.getSearchCount(params);
@@ -39,39 +36,39 @@ public class BorrowController {
     }
 
     // 添加借阅
-    @RequestMapping(value = "/addBorrow")
+    @PostMapping(value = "/addBorrow")
     public Integer addBorrow(@RequestBody Borrow borrow){
         return borrowService.addBorrow(borrow);
     }
 
     // 获得数量
-    @RequestMapping(value = "/getCount")
+    @GetMapping(value = "/getCount")
     public Integer getCount(){
         return borrowService.getCount();
     }
 
     // 删除借阅
-    @RequestMapping(value = "/deleteBorrow")
+    @DeleteMapping(value = "/deleteBorrow")
     public Integer deleteBorrow(@RequestBody Borrow borrow){
         return borrowService.deleteBorrow(borrow);
     }
 
     // 删除一些借阅
-    @RequestMapping(value = "/deleteBorrows")
+    @DeleteMapping(value = "/deleteBorrows")
     public Integer deleteBorrows(@RequestBody List<Borrow> borrows){
         return borrowService.deleteBorrows(borrows);
     }
 
     // 更新借阅
-    @RequestMapping(value = "/updateBorrow")
+    @PutMapping(value = "/updateBorrow")
     public Integer updateBorrow(@RequestBody Borrow borrow){
         return borrowService.updateBorrow(borrow);
     }
 
     // 借书
-    @RequestMapping(value = {"/borrowBook", "/reader/borrowBook"})
+    @PostMapping(value = {"/borrowBook", "/reader/borrowBook"})
     @Transactional
-    public Integer borrowBook(Integer userid, Integer bookid){
+    public Integer borrowBook(@RequestParam Integer userid, @RequestParam Integer bookid){
         try{
             // 查询该书的情况
             BookInfo theBook = bookInfoService.queryBookInfoById(bookid);
@@ -107,9 +104,9 @@ public class BorrowController {
     }
 
     // 还书
-    @RequestMapping(value = {"/returnBook", "/reader/returnBook"})
+    @PutMapping(value = {"/returnBook", "/reader/returnBook"})
     @Transactional
-    public Integer returnBook(Integer borrowid, Integer bookid){
+    public Integer returnBook(@RequestParam Integer borrowid, @RequestParam Integer bookid){
         try {
             // 查询该书的情况
             BookInfo theBook = bookInfoService.queryBookInfoById(bookid);
