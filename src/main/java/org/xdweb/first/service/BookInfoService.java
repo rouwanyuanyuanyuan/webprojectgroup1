@@ -60,4 +60,11 @@ public interface BookInfoService {
      * @return
      */
     Integer deleteBookInfos(List<BookInfo> bookInfos);
+
+    /**
+     * 根据ID查询图书信息
+     * @param bookid
+     * @return
+     */
+    BookInfo queryBookInfoById(Integer bookid);
 }
