@@ -53,4 +53,11 @@ public interface BookInfoService {
      * @return
      */
     Integer updateBookInfo(BookInfo bookInfo);
+
+    /**
+     * 批量删除图书信息
+     * @param bookInfos
+     * @return
+     */
+    Integer deleteBookInfos(List<BookInfo> bookInfos);
 }

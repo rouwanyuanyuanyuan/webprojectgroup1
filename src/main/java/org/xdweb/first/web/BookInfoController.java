@@ -84,4 +84,14 @@ public class BookInfoController {
         log.info("修改图书信息,{}", bookInfo);
         return bookInfoService.updateBookInfo(bookInfo);
     }
+
+    /**
+     * 批量删除图书信息
+     * @param bookInfos
+     * @return
+     */
+    @DeleteMapping(value = "/deleteBookInfos")
+    public Integer deleteBookInfos(@RequestBody List<BookInfo> bookInfos){
+        return bookInfoService.deleteBookInfos(bookInfos);
+    }
 }
