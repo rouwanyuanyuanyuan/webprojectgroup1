@@ -46,14 +46,14 @@
     </where>
     limit #{begin}, #{size}
   </select>
-  <insert id="insert" parameterType="com.rabbiter.bms.model.BookType">
+  <insert id="insert" parameterType="org.xdweb.first.model.BookType">
     insert into book_type (bookTypeId, bookTypeName, bookTypeDesc
     )
     values (#{booktypeid,jdbcType=INTEGER}, #{booktypename,jdbcType=VARCHAR}, #{booktypedesc,jdbcType=VARCHAR}
            )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.rabbiter.bms.model.BookType">
+  <insert id="insertSelective" parameterType="org.xdweb.first.model.BookType">
     insert into book_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="booktypeid != null">
@@ -84,7 +84,7 @@
     where bookTypeId = #{booktypeid,jdbcType=INTEGER}
   </delete>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.rabbiter.bms.model.BookType">
+  <update id="updateByPrimaryKeySelective" parameterType="org.xdweb.first.model.BookType">
     update book_type
     <set>
       <if test="booktypename != null">
@@ -98,7 +98,7 @@
   </update>
 
 
-  <update id="updateByPrimaryKey" parameterType="com.rabbiter.bms.model.BookType">
+  <update id="updateByPrimaryKey" parameterType="org.xdweb.first.model.BookType">
     update book_type
     set bookTypeName = #{booktypename,jdbcType=VARCHAR},
         bookTypeDesc = #{booktypedesc,jdbcType=VARCHAR}
