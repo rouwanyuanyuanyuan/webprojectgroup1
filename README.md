@@ -44,3 +44,15 @@ https://docs.qq.com/doc/DWE5aYUV6bkRCcGx5
 
 ## TASK 6
 完成了Web应用的设计
+
+
+## TASK 7
+完成了WEB应用的构建，具体页面可在部署项目后查看
+
+
+## TASK 8
+完成了项目的测试文档的撰写
+
+
+## TASK 9
+完成了项目的运维文档的撰写
